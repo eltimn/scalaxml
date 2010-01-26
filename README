@@ -1,0 +1,10 @@
+Original Code from "Processing real world HTML as if it were XML in scala"
+http://www.hars.de/2009/01/html-as-xml-in-scala.html
+
+Currently, only TagSoup is implemented.
+
+To build you must use sbt
+http://code.google.com/p/simple-build-tool/
+
+Jar is available at:
+http://dl.dropbox.com/u/1154284/scalaxml-0.1.jar

@@ -1,0 +1,66 @@
+package com.eltimn.scalaxml
+
+import _root_.java.io.{InputStream, InputStreamReader, Reader,
+		       File, FileDescriptor, FileInputStream}
+import _root_.org.apache.xalan.xsltc.trax.DOM2SAX
+import _root_.org.xml.sax.InputSource
+import _root_.scala.xml.{Node,TopScope}
+
+trait DOMFactoryAdapter extends NonBindingFactoryAdapter {
+
+  def getDOM(reader: Reader) : _root_.org.w3c.dom.Node
+
+  /** loading from a SAX source is useless here */
+  override def loadXML(unused : InputSource) : Node = {
+    throw(new Exception("Not Implemented"))
+  }
+	  
+  def loadXML(dom: _root_.org.w3c.dom.Node) : Node = {
+    val dom2sax = new DOM2SAX(dom)
+    dom2sax.setContentHandler(this)
+    scopeStack.push(TopScope)
+    dom2sax.parse()
+    scopeStack.pop
+    return rootElem
+  }
+
+  /** loads XML from given file */
+  override def loadFile(file: File): Node = {
+    val is = new FileInputStream(file)
+    val elem = load(is)
+    is.close
+    elem
+  }
+ 
+  /** loads XML from given file descriptor */
+  override def loadFile(fileDesc: FileDescriptor): Node = {
+    val is = new FileInputStream(fileDesc)
+    val elem = load(is)
+    is.close
+    elem
+  }
+
+  /** loads XML from given file */
+  override def loadFile(fileName: String): Node = {
+    val is = new FileInputStream(fileName)
+    val elem = load(is)
+    is.close
+    elem
+  }
+
+  /** loads XML from given InputStream */
+  override def load(is: InputStream): Node =
+    load(new InputStreamReader(is))
+
+  /** loads XML from given Reader */
+  override def load(reader: Reader): Node =
+    loadXML(getDOM(reader))
+
+  /** loads XML from given sysID */
+  override def load(sysID: String): Node = {
+    val is = new java.net.URL(sysID).openStream()
+    val elem = load(is)
+    is.close
+    elem
+  }
+}
