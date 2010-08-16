@@ -1,8 +1,8 @@
 package com.eltimn.scalaxml
 
-import _root_.scala.xml.parsing.FactoryAdapter
-import _root_.scala.xml.factory.NodeFactory
-import _root_.scala.xml.{Elem,MetaData,NamespaceBinding, Node,Text,TopScope}
+import scala.xml.parsing.FactoryAdapter
+import scala.xml.factory.NodeFactory
+import scala.xml.{Elem, MetaData, NamespaceBinding, Node, Text, TopScope}
 
 trait NonBindingFactoryAdapter extends FactoryAdapter
                                with NodeFactory[Elem] {
