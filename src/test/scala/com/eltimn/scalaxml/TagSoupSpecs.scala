@@ -11,8 +11,8 @@ object TagSoupSpecs extends Specification {
     "retrieve a URI and parse response into well-formed XML" in {
       val html = (new TagSoupFactoryAdapter).load("http://www.xml.org/")
       val divs = (html \\ "body" \\ "div")
-      val firstDivIdTxt = (divs.first \ "@id").text
-      
+      val firstDivIdTxt = (divs.head \ "@id").text
+
       html must haveClass[scala.xml.Elem]
       divs.length must beGreaterThan(0)
       firstDivIdTxt must_== "pagewrapper"

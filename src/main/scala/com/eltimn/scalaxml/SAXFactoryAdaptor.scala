@@ -1,7 +1,7 @@
 package com.eltimn.scalaxml
 
 import org.xml.sax.{InputSource, XMLReader}
-import scala.xml.{Node, TopScope}
+import scala.xml.{Node, SAXParser, TopScope}
 
 trait SAXFactoryAdapter extends NonBindingFactoryAdapter {
 
@@ -9,7 +9,7 @@ trait SAXFactoryAdapter extends NonBindingFactoryAdapter {
       concrete subclasses */
   def getReader(): XMLReader
 
-  override def loadXML(source: InputSource): Node = {
+  override def loadXML(source: InputSource, parser: SAXParser): Node = {
     val reader = getReader()
     reader.setContentHandler(this)
     scopeStack.push(TopScope)
