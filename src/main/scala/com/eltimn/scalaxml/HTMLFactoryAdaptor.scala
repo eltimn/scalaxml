@@ -1,6 +1,6 @@
 package com.eltimn.scalaxml
 
-import _root_.scala.xml.parsing.FactoryAdapter
+import scala.xml.parsing.FactoryAdapter
 
 trait HTMLFactoryAdapter extends FactoryAdapter {
 

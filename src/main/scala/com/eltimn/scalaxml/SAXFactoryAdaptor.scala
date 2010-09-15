@@ -1,11 +1,11 @@
 package com.eltimn.scalaxml
 
-import org.xml.sax.{XMLReader, InputSource}
+import org.xml.sax.{InputSource, XMLReader}
 import scala.xml.{Node, TopScope}
 
 trait SAXFactoryAdapter extends NonBindingFactoryAdapter {
 
-  /** The method [getReader] has to implemented by
+  /** The method [getReader] has to be implemented by
       concrete subclasses */
   def getReader(): XMLReader
 
