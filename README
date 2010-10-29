@@ -9,3 +9,12 @@ http://code.google.com/p/simple-build-tool/
 Jars are available in the Downloads section
 
 Scala 2.8.0 version is built from tcn_wip_2.8 branch
+
+
+Simple usage:
+
+import com.eltimn.scalaxml.TagSoupFactoryAdapter
+
+val xml = (new TagSoupFactoryAdapter).load("http://www.liftweb.net/")
+val title = (xml \\ "title").text
+assert(title == "Lift Web Framework :: Home")
