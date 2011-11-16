@@ -2,17 +2,23 @@ import sbt._
 
 class ScalaxmlProject(info: ProjectInfo) extends DefaultProject(info) {
 
-	val tagsoup = "org.ccil.cowan.tagsoup" % "tagsoup" % "1.2" % "compile->default"
+  val specsVersion = buildScalaVersion match {
+    case "2.8.0" => "1.6.5"
+    case "2.9.1" => "1.6.9"
+    case _       => "1.6.8"
+  }
 
-	val specs = "org.scala-tools.testing" %% "specs" % "1.6.8" % "test->default"
-	val junit = "junit" % "junit" % "4.5" % "test->default"
+	val tagsoup = "org.ccil.cowan.tagsoup" % "tagsoup" % "1.2" % "compile"
+
+	val specs = "org.scala-tools.testing" %% "specs" % specsVersion % "test"
+	val junit = "junit" % "junit" % "4.5" % "test"
 
 	/**
    * Test if project is a SNAPSHOT build.
    */
   def isSnapshot = version.toString.endsWith("-SNAPSHOT")
 
-  lazy val localRepo = Path.userHome / "projects" / "eltimn-mvn-repo"
+  lazy val localRepo = Path.userHome / "projects" / "eltimn.github.com" / "maven2"
 
 	object PublishRepositories {
     lazy val snapshot = Resolver.file("eltimn Maven Repo for Snapshots", localRepo / "snapshots" asFile)
