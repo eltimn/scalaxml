@@ -14,17 +14,17 @@ trait NonBindingFactoryAdapter extends FactoryAdapter
   protected def create(pre: String, label: String,
                        attrs: MetaData, scpe: NamespaceBinding,
 		       children: Seq[Node]): Elem =
-    Elem( pre, label, attrs, scpe, children:_* )
-  
-	
+    Elem( pre, label, attrs, scpe, true, children:_* )
+
+
   // -- methods for FactoryAdapter
   def createNode(pre: String, label: String,
                  attrs: MetaData, scpe: NamespaceBinding,
                  children: List[Node] ): Elem =
-    Elem( pre, label, attrs, scpe, children:_* )
-	 
+    Elem( pre, label, attrs, scpe, true, children:_* )
+
   def createText(text: String) = Text(text)
-	
+
   def createProcInstr(target: String, data: String) =
     makeProcInstr(target, data)
 }

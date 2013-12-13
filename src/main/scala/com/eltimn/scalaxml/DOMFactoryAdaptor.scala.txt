@@ -1,10 +1,10 @@
 package com.eltimn.scalaxml
 
-import _root_.java.io.{InputStream, InputStreamReader, Reader,
+import java.io.{InputStream, InputStreamReader, Reader,
 		       File, FileDescriptor, FileInputStream}
-import _root_.org.apache.xalan.xsltc.trax.DOM2SAX
-import _root_.org.xml.sax.InputSource
-import _root_.scala.xml.{Node,TopScope}
+import org.apache.xalan.xsltc.trax.DOM2SAX
+import org.xml.sax.InputSource
+import scala.xml.{Node,TopScope}
 
 trait DOMFactoryAdapter extends NonBindingFactoryAdapter {
 
@@ -14,7 +14,7 @@ trait DOMFactoryAdapter extends NonBindingFactoryAdapter {
   override def loadXML(unused : InputSource) : Node = {
     throw(new Exception("Not Implemented"))
   }
-	  
+
   def loadXML(dom: _root_.org.w3c.dom.Node) : Node = {
     val dom2sax = new DOM2SAX(dom)
     dom2sax.setContentHandler(this)
@@ -31,7 +31,7 @@ trait DOMFactoryAdapter extends NonBindingFactoryAdapter {
     is.close
     elem
   }
- 
+
   /** loads XML from given file descriptor */
   override def loadFile(fileDesc: FileDescriptor): Node = {
     val is = new FileInputStream(fileDesc)

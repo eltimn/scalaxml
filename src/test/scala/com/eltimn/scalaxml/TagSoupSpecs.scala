@@ -1,11 +1,9 @@
 package com.eltimn.scalaxml
 
-import org.specs.Specification
-import org.specs.runner.JUnit4
+import org.scalatest.WordSpec
+import org.scalatest.matchers.ShouldMatchers
 
-class TagSoupSpecsTest extends JUnit4(TagSoupSpecs)
-
-object TagSoupSpecs extends Specification {
+object TagSoupSpecs extends WordSpec with ShouldMatchers {
 
   "ScalaXml TagSoup" should {
     "retrieve a URI and parse response into well-formed XML" in {
@@ -13,9 +11,8 @@ object TagSoupSpecs extends Specification {
       val divs = (html \\ "body" \\ "div")
       val firstDivIdTxt = (divs.head \ "@id").text
 
-      html must haveClass[scala.xml.Elem]
-      divs.length must beGreaterThan(0)
-      firstDivIdTxt must_== "pagewrapper"
+      divs.length should be > 0
+      firstDivIdTxt should be ("pagewrapper")
     }
   }
 }
